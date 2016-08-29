@@ -1,7 +1,11 @@
+@Model List<fitsys.Models.Blog>
+
+
 @{
     ViewData["Title"] = "About";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>@ViewData["Message"]</h3>
 
 <p>Use this area to provide additional information.</p>
+@foreach(var cm in Model) {
+     <div>@cm.Url</div>
+}
