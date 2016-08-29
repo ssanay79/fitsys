@@ -3,27 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using fitsys.Models;
 
 namespace fitsys.Controllers
 {
     public class HomeController : Controller
     {
+        
         public IActionResult Index()
         {
+            
             return View();
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            List<Blog> blogModel = new List<Blog>();
+            using (var db = new BloggingContext())
+            {
+                db.Blogs.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
+                var count = db.SaveChanges();
+                Console.WriteLine("{0} records saved to database", count);
 
-            return View();
+                Console.WriteLine();
+                Console.WriteLine("All blogs in database:");
+                foreach (var blog in db.Blogs)
+                {
+                    Console.WriteLine(" - {0}", blog.Url);
+                }
+                blogModel = db.Blogs.ToList();
+            }
+            
+            return View(blogModel);
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
+            
             return View();
         }
 
