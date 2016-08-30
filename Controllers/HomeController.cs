@@ -21,7 +21,7 @@ namespace fitsys.Controllers
             List<Blog> blogModel = new List<Blog>();
             using (var db = new BloggingContext())
             {
-                db.Blogs.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
+                db.Blogs.Add(new Blog { Url = "http://blogs.msdn.com/adonet2" });
                 var count = db.SaveChanges();
                 Console.WriteLine("{0} records saved to database", count);
 
